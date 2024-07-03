@@ -32,11 +32,11 @@ def import_mnist():
 		label = np.load("./mnist/label.npy", allow_pickle=True)
 
 
-	data = PCA(n_components=10).fit_transform(data)
-	data = StandardScaler().fit_transform(data)
+	data_reduced = PCA(n_components=10).fit_transform(data)
+	data_reduced = StandardScaler().fit_transform(data_reduced)
 	label = label.astype(np.int32)
 
-	return data, label
+	return data, data_reduced, label
 
 
 def check_pairwise_sep(percentile_thrd, data, label):

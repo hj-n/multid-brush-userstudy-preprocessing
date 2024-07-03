@@ -11,12 +11,12 @@ from tqdm import tqdm
 import numpy as np
 
 
-def generate_projections(trial_infos, data, label):
+def generate_projections(trial_infos, original_data, data, label):
 	projections = []
 
 	## generate a list of big random numbers without repetition
 	np.random.seed(0)
-	random_numbers = np.random.choice(1000, len(trial_infos) * len(trial_infos["P1"]), replace=False)
+	random_numbers = np.random.choice(10000, len(trial_infos) * len(trial_infos["P1"]), replace=False)
 	identifier_idx = 0
 	for participant in trial_infos:
 		print("participant: ", participant)
@@ -25,24 +25,30 @@ def generate_projections(trial_infos, data, label):
 			distortion_amount = trial["distortion_amount"]
 			point_number = trial["point_number"]
 
+			original_data_selected = original_data[np.isin(label, classes)]
 			data_selected = data[np.isin(label, classes)]
 			label_selected = label[np.isin(label, classes)]
 
+
 			## make each class to have number of "point_number" (randomly selected)
+			original_data_sampled = []
 			data_sampled = []
 			label_sampled = []
 
 			for class_ in classes:
+				original_data_class = original_data_selected[label_selected == class_]
 				data_class = data_selected[label_selected == class_]
 				label_class = label_selected[label_selected == class_]
 
 				idx = np.random.choice(data_class.shape[0], point_number, replace=False)
 
+				original_data_sampled += original_data_class[idx].tolist()
 				data_sampled += data_class[idx].tolist()
 				label_sampled += label_class[idx].tolist()
 			
 			data_sampled = np.array(data_sampled)
 			label_sampled = np.array(label_sampled)
+			original_data_sampled = np.array(original_data_sampled)
 			if distortion_amount == "pca":
 				pca = PCA(n_components=2)
 				projection = pca.fit_transform(data_sampled)
@@ -56,6 +62,9 @@ def generate_projections(trial_infos, data, label):
 			identifier = int(random_numbers[identifier_idx])
 			projections.append({
 				"projection": projection.tolist(),
+				"original_data": original_data_sampled.tolist(),
+				"data": data_sampled.tolist(),
+				"label": label_sampled.tolist(),
 				"identifier":	identifier
 			})
 

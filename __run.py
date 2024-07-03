@@ -24,7 +24,7 @@ print("Finished!!")
 
 
 print("downlowding mnist data...")
-data, label = em.import_mnist()
+original_data, data, label = em.import_mnist()
 print("Finding mnist pairs exceeding 90th percentile...")
 pairs = em.check_pairwise_sep(percentile, data, label)
 print("Finished!!")
@@ -47,7 +47,7 @@ print("assigning trial infos to specs...")
 atis.assign_trial_infos_to_specs(trial_infos, specs_arr)
 
 print("generating projections...")
-projections = gp.generate_projections(trial_infos, data, label)
+projections = gp.generate_projections(trial_infos, original_data, data, label)
 
 ## save results
 print("saving results...")
@@ -56,7 +56,19 @@ with open("./trial_infos/trial_infos_exp1.json", "w") as f:
 
 for i, projection_info in enumerate(projections):
 	projection_list = projection_info["projection"]
+	original_data_list = projection_info["original_data"]
+	data_list = projection_info["data"]
+	label_list = projection_info["label"]
 	identifier = projection_info["identifier"]
 
-	with open(f"./trial_projections/exp1/{identifier}.json", "w") as f:
+	with open(f"./trial_data/exp1/original_data/{identifier}.json", "w") as f:
+		json.dump(original_data_list, f)
+
+	with open(f"./trial_data/exp1/projections/{identifier}.json", "w") as f:
 		json.dump(projection_list, f)
+	
+	with open(f"./trial_data/exp1/data/{identifier}.json", "w") as f:
+		json.dump(data_list, f)
+	
+	with open(f"./trial_data/exp1/labels/{identifier}.json", "w") as f:
+		json.dump(label_list, f)
