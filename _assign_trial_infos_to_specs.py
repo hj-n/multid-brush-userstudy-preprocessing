@@ -21,4 +21,5 @@ def assign_trial_infos_to_specs(trial_infos, specs_arr):
 				trial["classes"] = [2, 3, 6, 7]
 				trial["target"] = 7
 				trial["distortion_amount"] = "pca"
+				trial["point_number"] = 300
 		

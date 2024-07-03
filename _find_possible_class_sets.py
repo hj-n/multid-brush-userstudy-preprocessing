@@ -30,9 +30,6 @@ def find_possible_class_sets(pairs):
 				four_classes_set.append(elements_arr)
 	
 
-	print("Two classes set: ", two_classes_set)
-	print("Three classes set: ", three_classes_set)
-	print("Four classes set: ", four_classes_set)
 
 	return two_classes_set + three_classes_set + four_classes_set
 

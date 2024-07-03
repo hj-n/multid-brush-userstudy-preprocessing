@@ -46,7 +46,7 @@ def check_pairwise_sep(percentile_thrd, data, label):
 	separable_pairs = []
 
 
-	for label_i in tqdm(range(10)):
+	for label_i in range(10):
 		for label_j in range(label_i + 1, 10):
 
 			X_pair = data[((label == label_i) | (label == label_j))]

@@ -4,6 +4,7 @@ import _nontriviality as nt
 import _find_possible_class_sets as fpcs
 import _setup_trials as st
 import _assign_trial_infos_to_specs as atis
+import _generate_projections as gp
 
 import _variables_exp1 as ve1
 
@@ -45,7 +46,17 @@ trial_infos = st.setup_trials(ve.INDEPENDENT_VARIABLES, ve.CONFOUNDING_VARIABLES
 print("assigning trial infos to specs...")
 atis.assign_trial_infos_to_specs(trial_infos, specs_arr)
 
+print("generating projections...")
+projections = gp.generate_projections(trial_infos, data, label)
+
 ## save results
 print("saving results...")
 with open("./trial_infos/trial_infos_exp1.json", "w") as f:
 	json.dump(trial_infos, f)
+
+for i, projection_info in enumerate(projections):
+	projection_list = projection_info["projection"]
+	identifier = projection_info["identifier"]
+
+	with open(f"./trial_projections/exp1/{identifier}.json", "w") as f:
+		json.dump(projection_list, f)
