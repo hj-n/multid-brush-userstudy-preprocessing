@@ -2,10 +2,19 @@ import _find_percentile as fp
 import _examine_mnist as em
 import _nontriviality as nt
 import _find_possible_class_sets as fpcs
+import _setup_trials as st
+import _assign_trial_infos_to_specs as atis
+
+import _variables_exp1 as ve1
+
+import json
 
 ## turn off warnings
 import warnings
 warnings.filterwarnings('ignore')
+
+
+ve = ve1
 
 
 print("Finding 90th percentile...")
@@ -29,3 +38,14 @@ classes_sets = fpcs.find_possible_class_sets(pairs)
 
 print("construct specs array...")
 specs_arr = fpcs.construct_specs(classes_sets, nontriviality_arr)
+
+print("constrct trials infos...")
+trial_infos = st.setup_trials(ve.INDEPENDENT_VARIABLES, ve.CONFOUNDING_VARIABLES)
+
+print("assigning trial infos to specs...")
+atis.assign_trial_infos_to_specs(trial_infos, specs_arr)
+
+## save results
+print("saving results...")
+with open("./trial_infos/trial_infos_exp1.json", "w") as f:
+	json.dump(trial_infos, f)

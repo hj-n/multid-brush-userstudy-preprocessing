@@ -54,12 +54,10 @@ def construct_specs(classes_sets, nontriviality_arr):
 
 				for distortion_amount in ["low_distortion", "high_mn", "high_fn"]:
 					spec["distortion_amount"] = distortion_amount
-					spec["key"] = f"point_{point_number}_class_{len(classes_set)}_nontriviality_{nontriviality_arr[class_]}_distortion_{distortion_amount}_target_{class_}"
+					spec["key"] = f"point_{point_number}_class_{len(classes_set)}_nontriviality_{nontriviality_arr[class_]}_distortion_{distortion_amount}"
 
 					specs_arr.append(spec.copy())
 	
 	
-	print(specs_arr)
-	print(len(specs_arr))
 
 	return specs_arr
