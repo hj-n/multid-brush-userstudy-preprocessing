@@ -5,8 +5,14 @@ import _find_possible_class_sets as fpcs
 import _setup_trials as st
 import _assign_trial_infos_to_specs as atis
 import _generate_projections as gp
+from tqdm import tqdm
+import numpy as np
+
+import _final_preprocess as fpre
 
 import _variables_exp1 as ve1
+
+import os
 
 import json
 
@@ -72,3 +78,26 @@ for i, projection_info in enumerate(projections):
 	
 	with open(f"./trial_data/exp1/labels/{identifier}.json", "w") as f:
 		json.dump(label_list, f)
+
+
+
+
+for file_name in tqdm(os.listdir("./trial_data/exp1/original_data/")):
+
+	with open(f"./trial_data/exp1/original_data/{file_name}", "r") as f:
+		original_data = json.load(f)
+	
+	with open(f"./trial_data/exp1/projections/{file_name}", "r") as f:
+		projection = json.load(f)
+	
+	with open(f"./trial_data/exp1/data/{file_name}", "r") as f:
+		hd = json.load(f)
+	
+	with open(f"./trial_data/exp1/labels/{file_name}", "r") as f:
+		labels = json.load(f)
+
+
+	preprocessed = fpre.preprocess(np.array(original_data), np.array(hd), np.array(projection), np.array(labels), 50)
+
+	with open(f"./trial_data/exp1/preprocessed/{file_name}", "w") as f:
+		json.dump(preprocessed, f)
