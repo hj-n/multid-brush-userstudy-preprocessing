@@ -102,8 +102,8 @@ def preprocess(original_data, hd, ld, labels, max_neighbors):
 	ld = ld.astype(np.float16)
 	labels = labels.astype(np.int8) if labels is not None else None
 
-	preprocessed["original_data"] = original_data.tolist()
-	preprocessed["hd"] = hd.tolist()
+	preprocessed["hd"] = original_data.tolist()
+	preprocessed["original_data"] = hd.tolist()
 	preprocessed["ld"] = ld.tolist()
 	if labels is not None:
 		preprocessed["labels"] = labels.tolist()

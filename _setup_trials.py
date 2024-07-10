@@ -60,7 +60,7 @@ def setup_trials(ind_variables, conf_variables):
 	return trial_infos_per_participants
 
 
-	## training은 무조건 같은 세팅 같은 임베딩 쓰자
+
 
 	
 

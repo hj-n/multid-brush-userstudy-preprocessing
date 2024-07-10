@@ -59,32 +59,32 @@ CONFOUNDING_VARIABLES = {
 	},
 	"d": {
 		"cluster_number": 2,
-		"point_number": 300,
+		"point_number": 150,
 		"nontriviality": "medium"
 	},
 	"e": {
 		"cluster_number": 3,
-		"point_number": 300,
+		"point_number": 150,
 		"nontriviality": "high"
 	},
 	"f": {
 		"cluster_number": 4,
-		"point_number": 300,
+		"point_number": 150,
 		"nontriviality": "low"
 	},
 	"g": {
 		"cluster_number": 2,
-		"point_number": 500,
+		"point_number": 200,
 		"nontriviality": "high"
 	},
 	"h": {
 		"cluster_number": 3,
-		"point_number": 500,
+		"point_number": 200,
 		"nontriviality": "low"
 	},
 	"i": {
 		"cluster_number": 4,
-		"point_number": 500,
+		"point_number": 200,
 		"nontriviality": "medium"
 	}
 }

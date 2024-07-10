@@ -9,7 +9,6 @@ def assign_trial_infos_to_specs(trial_infos, specs_arr):
 			if trial["stage"] == "experiment":
 				key = f"point_{trial['point_number']}_class_{trial['cluster_number']}_nontriviality_{trial['nontriviality']}_distortion_{trial['distortion_amount']}"
 				matching_spec = []
-				# print(key)
 				for spec in specs_arr:
 					if spec['key'] == key:
 						matching_spec.append(spec)
@@ -21,5 +20,5 @@ def assign_trial_infos_to_specs(trial_infos, specs_arr):
 				trial["classes"] = [2, 3, 6, 7]
 				trial["target"] = 7
 				trial["distortion_amount"] = "pca"
-				trial["point_number"] = 300
+				trial["point_number"] = 100
 		

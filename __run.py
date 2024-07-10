@@ -29,6 +29,7 @@ percentile = fp.find_90_percentile()
 print("Finished!!")
 
 
+
 print("downlowding mnist data...")
 original_data, data, label = em.import_mnist()
 print("Finding mnist pairs exceeding 90th percentile...")

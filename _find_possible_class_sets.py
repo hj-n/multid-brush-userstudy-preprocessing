@@ -46,7 +46,7 @@ def construct_specs(classes_sets, nontriviality_arr):
 				"classes": classes_set,
 				"target": class_
 			}
-			for point_number in [100, 300, 500]:
+			for point_number in [100, 150, 200]:
 				spec["point_number"] = point_number
 
 				for distortion_amount in ["low_distortion", "high_mn", "high_fn"]:
