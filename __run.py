@@ -11,6 +11,7 @@ import numpy as np
 import _final_preprocess as fpre
 
 import _variables_exp1 as ve1
+import _variables_exp2 as ve2
 
 import os
 
@@ -20,8 +21,13 @@ import json
 import warnings
 warnings.filterwarnings('ignore')
 
+SETTING = "exp2"
 
-ve = ve1
+
+if SETTING == "exp1":
+	ve = ve1
+elif SETTING == "exp2":
+	ve = ve2
 
 
 print("Finding 90th percentile...")
@@ -58,7 +64,7 @@ projections = gp.generate_projections(trial_infos, original_data, data, label)
 
 ## save results
 print("saving results...")
-with open("./trial_infos/trial_infos_exp1.json", "w") as f:
+with open(f"./trial_infos/trial_infos_{SETTING}.json", "w") as f:
 	json.dump(trial_infos, f)
 
 for i, projection_info in enumerate(projections):
@@ -68,37 +74,37 @@ for i, projection_info in enumerate(projections):
 	label_list = projection_info["label"]
 	identifier = projection_info["identifier"]
 
-	with open(f"./trial_data/exp1/original_data/{identifier}.json", "w") as f:
+	with open(f"./trial_data/{SETTING}/original_data/{identifier}.json", "w") as f:
 		json.dump(original_data_list, f)
 
-	with open(f"./trial_data/exp1/projections/{identifier}.json", "w") as f:
+	with open(f"./trial_data/{SETTING}/projections/{identifier}.json", "w") as f:
 		json.dump(projection_list, f)
 	
-	with open(f"./trial_data/exp1/data/{identifier}.json", "w") as f:
+	with open(f"./trial_data/{SETTING}/data/{identifier}.json", "w") as f:
 		json.dump(data_list, f)
 	
-	with open(f"./trial_data/exp1/labels/{identifier}.json", "w") as f:
+	with open(f"./trial_data/{SETTING}/labels/{identifier}.json", "w") as f:
 		json.dump(label_list, f)
 
 
 
 
-for file_name in tqdm(os.listdir("./trial_data/exp1/original_data/")):
+for file_name in tqdm(os.listdir(f"./trial_data/{SETTING}/original_data/")):
 
-	with open(f"./trial_data/exp1/original_data/{file_name}", "r") as f:
+	with open(f"./trial_data/{SETTING}/original_data/{file_name}", "r") as f:
 		original_data = json.load(f)
 	
-	with open(f"./trial_data/exp1/projections/{file_name}", "r") as f:
+	with open(f"./trial_data/{SETTING}/projections/{file_name}", "r") as f:
 		projection = json.load(f)
 	
-	with open(f"./trial_data/exp1/data/{file_name}", "r") as f:
+	with open(f"./trial_data/{SETTING}/data/{file_name}", "r") as f:
 		hd = json.load(f)
 	
-	with open(f"./trial_data/exp1/labels/{file_name}", "r") as f:
+	with open(f"./trial_data/{SETTING}/labels/{file_name}", "r") as f:
 		labels = json.load(f)
 
 
 	preprocessed = fpre.preprocess(np.array(original_data), np.array(hd), np.array(projection), np.array(labels), 50)
 
-	with open(f"./trial_data/exp1/preprocessed/{file_name}", "w") as f:
+	with open(f"./trial_data/{SETTING}/preprocessed/{file_name}", "w") as f:
 		json.dump(preprocessed, f)

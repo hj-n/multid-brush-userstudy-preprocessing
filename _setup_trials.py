@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def setup_trials(ind_variables, conf_variables):
-	trials_df = pd.read_csv("./trials/trials_exp1.csv")
+	trials_df = pd.read_csv("./trials/trials.csv")
 	techniques_df = pd.read_csv("./trials/techniques.csv")
 
 
